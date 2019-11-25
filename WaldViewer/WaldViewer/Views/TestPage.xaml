@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage
+    BindingContext="viewModels:TestViewModel"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:WaldViewer.Views"
+             xmlns:viewModels="clr-namespace:WaldViewer.ViewModels"
+             mc:Ignorable="d"
+             x:Class="WaldViewer.Views.TestPage"
+             x:TypeArguments="viewModels:TestViewModel">
+
+    <Grid BackgroundColor="Red"/>
+
+</local:BaseContentPage>

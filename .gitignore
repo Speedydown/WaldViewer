@@ -3,3 +3,10 @@
 ################################################################################
 
 /WaldViewer/.vs/WaldViewer
+/WaldViewer/WaldViewer/bin/Debug/netstandard2.0
+/WaldViewer/WaldViewer/obj
+/WaldViewer/WaldViewer.Android/bin/Debug
+/WaldViewer/WaldViewer.Android/obj
+/WaldViewer/WaldViewer.Android/Resources/Resource.designer.cs
+/WaldViewer/WaldViewer.iOS/bin/iPhoneSimulator/Debug
+/WaldViewer/WaldViewer.iOS/obj
