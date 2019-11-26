@@ -1,16 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:BaseContentPage
-    BindingContext="viewModels:MainViewModel"
+<TabbedPage 
+    BackgroundColor="{StaticResource NavigationPrimary}"
     xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:WaldViewer.Views"
              xmlns:viewModels="clr-namespace:WaldViewer.ViewModels"
              mc:Ignorable="d"
+    NavigationPage.HasNavigationBar="false"
+             BarBackgroundColor="{StaticResource NavigationPrimary}"
+    BarTextColor="White"
              x:Class="WaldViewer.Views.MainPage"
-             x:TypeArguments="viewModels:MainViewModel">
+             android:TabbedPage.ToolbarPlacement="Bottom">
 
-    <Grid BackgroundColor="Blue"/>
+    <local:NewsItempage Title="Nieuws"/>
+    <local:TestPage Title="Live comments"/>
 
-</local:BaseContentPage>
+</TabbedPage>

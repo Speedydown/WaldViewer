@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:WaldViewer.Views"
+             xmlns:Converters="clr-namespace:WaldViewer.ValueConverters"
+             xmlns:templateSelectors="clr-namespace:WaldViewer.TemplateSelectors"
+             xmlns:viewModels="clr-namespace:WaldViewer.ViewModels"
+                       xmlns:behaviors="clr-namespace:Corcav.Behaviors;assembly=Corcav.Behaviors"
+                       x:TypeArguments="viewModels:NewsItemsViewModel"
+             mc:Ignorable="d"
+             x:Class="WaldViewer.Views.NewsItempage" BackgroundColor="White">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="HightlightedTemplate">
+                <ViewCell>
+                    <!--Uitgelicht-->
+                    <Grid RowSpacing="0" ColumnSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="190"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40*"/>
+                            <ColumnDefinition Width="60*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid  Grid.Row="1">
+                            <Image Source="{Binding Imageurl}" HorizontalOptions="FillAndExpand" Aspect="AspectFill" VerticalOptions="FillAndExpand" />
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1" BackgroundColor="#e9f0fa">
+                            <StackLayout Padding="10">
+                                <Label Text="{Binding Title}" TextColor="#0c0050" FontSize="Medium" FontAttributes="Bold"/>
+                                <Label Text="{Binding Body}" TextColor="Black" FontSize="Small"/>
+                            </StackLayout>
+                        </Grid>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="ItemTemplate">
+                <ViewCell>
+                    <Grid BackgroundColor="White" Padding="10,5" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding Title}" TextColor="{StaticResource NavigationPrimary}" FontSize="Default" FontAttributes="Bold" LineBreakMode="WordWrap"/>
+                        <Label Text="{Binding PublishedAt}" TextColor="{StaticResource NavigationPrimary}" FontSize="Micro" LineBreakMode="WordWrap" Grid.Row="1"/>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <Converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
+            <templateSelectors:NewsItemTemplateSelector x:Key="NewsItemTemplateSelector"
+                HightlightedTemplate="{StaticResource HightlightedTemplate}"
+                ItemTemplate="{StaticResource ItemTemplate}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <!--Loader-->
+            <ActivityIndicator Color="{StaticResource NavigationPrimary}" IsRunning="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center" />
+
+            <ListView 
+                IsVisible="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
+            ItemsSource="{Binding NewsItems}" 
+            ItemTemplate="{StaticResource NewsItemTemplateSelector}" 
+            HasUnevenRows="True" 
+            SeparatorVisibility="None"
+            IsPullToRefreshEnabled="True"
+            RefreshCommand="{Binding C_Refresh}"
+            IsRefreshing="{Binding IsRefreshing}">
+                <behaviors:Interaction.Behaviors>
+                    <behaviors:BehaviorCollection>
+                        <behaviors:EventToCommand EventName="ItemTapped" Command="{Binding C_ItemTapped}" PassEventArgument="True" />
+                    </behaviors:BehaviorCollection>
+                </behaviors:Interaction.Behaviors>
+                <ListView.Header>
+                    <Grid BackgroundColor="{StaticResource NavigationPrimary}" Padding="10,5">
+                        <Label TextColor="White" Text="Nieuws" FontSize="Large" FontAttributes="Bold"/>
+                    </Grid>
+                </ListView.Header>
+            </ListView>
+        </Grid>
+    </ContentPage.Content>
+</local:BaseContentPage>

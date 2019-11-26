@@ -9,6 +9,7 @@
              xmlns:viewModels="clr-namespace:WaldViewer.ViewModels"
              mc:Ignorable="d"
              x:Class="WaldViewer.Views.TestPage"
+  NavigationPage.HasNavigationBar="false"
              x:TypeArguments="viewModels:TestViewModel">
 
     <Grid BackgroundColor="Red"/>

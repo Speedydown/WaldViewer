@@ -9,6 +9,17 @@ namespace WaldViewer.ViewModels
 {
   public class BaseViewModel : INotifyPropertyChanged
   {
+    private bool _isLoading;
+    public bool IsLoading
+    {
+      get { return _isLoading; }
+      protected set
+      {
+        _isLoading = value;
+        OnPropertyChanged();
+      }
+    }
+
     private Task _loadTask;
 
     public Task LoadTask
@@ -24,6 +35,7 @@ namespace WaldViewer.ViewModels
 
     protected BaseViewModel()
     {
+      CreateCommands();
       LoadTask = Task.Run(() => Load() );
     }
 
@@ -49,6 +61,15 @@ namespace WaldViewer.ViewModels
     public void Navigate<TViewModelType>() where TViewModelType : BaseViewModel
     {
       App.NavigationService.Navigate<TViewModelType>();
+    }
+
+    #endregion
+
+    #region Commands
+
+    protected virtual void CreateCommands()
+    {
+
     }
 
     #endregion
